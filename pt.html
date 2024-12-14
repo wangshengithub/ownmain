@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://ptable.com/?lang=zh-hans#%E6%80%A7%E8%B4%A8 -->
+<html lang="zh-CN" data-iso="zh-hans" data-wiki="zh" dir="ltr" class="Property" data-wide="0" translate="no"><!-- toggled classes: Sidebar, Collapse, [Tab], Dark, SmoothResize, NoTransitions, FullScreen --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>元素周期表</title>
+  <link rel="icon" href="https://ptable.com/icon/pt-square.svg">
+  <link rel="apple-touch-icon" href="https://ptable.com/icon/pt-square-192.png">
+
+  <link rel="canonical" href="https://ptable.com/?lang=zh-hans">
+  <link rel="manifest" href="https://ptable.com/manifest/ptable.zh-hans.webmanifest" crossorigin="use-credentials">
+
+  <meta name="monetization" content="$ilp.uphold.com/Bw3wHNJbi7YJ">
+
+  <style>
+:root {
+	--solid:			#000;
+	--liquid:			#00D;
+	--gas:				#900;
+	--unknown:			#676;
+	--heat-gradient:	linear-gradient(to right, rgb(100,100,255), rgb(238, 238, 238), yellow, orange, red);
+
+	--body-bg:			rgb(243, 246, 248);
+	--body-bg-trans:	rgba(243, 246, 248, 0);
+	--blocks:			rgb(255, 255, 255);
+	--text:				0, 0, 0;
+	--darkshadow:		rgba(0, 0, 0, 0.24);
+	--lightshadow:		rgba(0, 0, 0, 0.12);
+	--hovered:			#f5f8fa;
+	--selected:			#DDD;
+	--group:			#003660;
+	--invert:			0;
+	--nodata:			hsl(0, 0%, 90%);
+
+	--lock:				1;
+	--element-pad:		0.05rem;
+	--base-vw:			1.8;
+	--sidebar-shrink:	1;
+	--margin:			0.3rem;
+	--min:				768px;
+	--square-vw:		18;
+	--minfont:			calc(var(--base-vw) * var(--min) / var(--sidebar-shrink) / 100);
+	--property-rows:	6;
+	--row-height:		calc((var(--square) - var(--2margin)) / var(--property-rows));
+	--groups:			18;
+	--grid-space:		calc(5 * var(--aspect-ratio)); /* HACK: these are too complex */
+	--icon-height:		1rem;
+	--tab-height:		calc(var(--icon-height) + var(--2margin));
+	--border-width:		calc(var(--gridgap) / 2);
+	--track-height:		var(--2margin);
+	--periods:			1em;
+	--button-size:		calc(2 * var(--track-height));
+	--bordercolor:		rgba(var(--text), 0.12);
+	--logo-ratio:		calc(280 / 121.1);
+	--rtl:				1;
+
+	--tab-active:		rgb(2,118,253);
+	--tab-hover:		rgb(45,190,252);
+	--tab-inactive:		#999;
+
+	/*** Derived ***/
+	--2margin:			calc(var(--margin) * 2);
+	--gridgap:			calc(var(--grid-space) * var(--sidebar-shrink) / var(--groups));
+	--fixedgridgap:		var(--gridgap); /* HACK: these are too complex */
+	--fixedborderwidth:	var(--border-width);
+	--groupfactor:		calc(1 + (var(--groups) - 18) / 18);
+
+	--alkali:			hsl(48deg, 77%, 64%);
+	--alkaline:			hsl(60deg, 83%, 67%);
+	--lanthanoid:		hsl(42deg, 62%, 76%);
+	--actinoid:			hsl(340deg, 67%, 88%);
+	--transition:		hsl(12deg, 87%, 85%);
+	--poor:				hsl(192deg, 62%, 80%);
+	--metalloid:		hsl(165deg, 58%, 76%);
+	--nonmetal:			hsl(120deg, 73%, 74%);
+	--noble:			hsl(300deg, 44%, 82%);
+
+	--nocategory:		#EEE;
+	--divider:			#CEF;
+	--divideroutline:	#AAF;
+	--dividerhover:		#BBF;
+}
+:root[dir="rtl"] {
+	--rtl:				-1;
+	--heat-gradient:	linear-gradient(to left, rgb(100,100,255), var(--blocks), yellow, orange, red);
+}
+.KeyRegion	{
+	--margin:			calc(0.3rem * var(--sidebar-shrink));
+	--2margin:			calc(var(--margin) * 2);
+}
+
+.Dark	{
+	--bordercolor:		rgba(var(--text), 0.2);
+
+	--solid:			#b5b5b5;
+	--liquid:			#99F;
+	--gas:				#F44;
+	--unknown:			#777;
+	--nodata:			#333;
+
+	--body-bg:			rgb(0, 0, 0);
+	--body-bg-trans:	rgba(0, 0, 0, 0);
+	--blocks:			#191919;
+	--text:				222, 222, 222;
+	--darkshadow:		rgba(255, 255, 255, 0.24);
+	--lightshadow:		rgba(255, 255, 255, 0.12); /* needed by safari */
+	--hovered:			#141D26;
+	--selected:			#393939;
+	--group:			#aaa5f3;
+	--invert:			1;
+
+	--tab-active:		#588ffe;
+	--tab-inactive:		#999;
+
+	--alkali:			#6c3b01;
+	--alkaline:			#846011;
+	--lanthanoid:		#402c17;
+	--actinoid:			#732e4c;
+	--transition:		#711019;
+	--poor:				#003666;
+	--metalloid:		#015146;
+	--nonmetal:			#3e6418;
+	--noble:			#3a2151;
+	--nocategory:		#222;
+	--divider:			#00A;
+	--divideroutline:	#00D;
+	--dividerhover:		#00B;
+}
+
+/*** Undone in interactive ***/
+.KeyRegion > :not(.SeriesState)	{ display: none; }
+
+/* Hidden properties, must be done early */
+.DataRegion .Resets,
+.DataRegion .Compounds		{ display: none !important; }
+
+*					{ box-sizing: border-box; /* Admit it, IE got this right and the initial standard was dumb */ }
+.NoTransitions *	{ transition: all 0.05s linear !important; }
+html, body			{ font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background-color: var(--body-bg); color: rgb(var(--text)); }
+body				{ margin: 0; }
+
+/*** Anchors ***/
+.Dark a[href]:not(figure *)		{ color: var(--tab-active); }
+.Dark a:visited:not(figure *)	{ color: var(--group); }
+footer a,
+.KeyRegion a,
+.Group > a			{ text-decoration: inherit; }
+main :not(data) > a[href]:hover	{ outline: medium solid var(--tab-hover); outline-offset: 0.09rem; }
+footer a:hover		{ text-decoration: underline; }
+a[href^="#"]:hover	{ outline: none; }
+
+/*** Reset ***/
+dd					{ margin: 0; }
+ul, ol				{ list-style-type: none; padding-inline-start: 0; }
+
+/*** Box shadows ***/
+header,
+.Raised + label,
+.adsbygoogle[data-adsbygoogle-status="done"],
+ol,
+input[type="search"],
+[value="expandedconfig"] + li > output > b::before,
+ul > li				{ background-color: var(--blocks); box-shadow: 0 1px 3px var(--lightshadow), 0 1px 2px var(--darkshadow); }
+.Raised + label:hover,
+.Raised:focus + *	{ box-shadow: 0 2px 4px var(--lightshadow), 0 2px 3px var(--darkshadow); }
+figure				{ box-shadow: 0 1px 3px var(--lightshadow), 0 1px 2px var(--darkshadow),
+							inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24); }
+.Raised:checked + label
+					{ box-shadow: inset 0 1px 3px rgba(0,0,0,0.24), inset 0 1px 2px rgba(0,0,0,0.48); }
+.Expand				{ box-shadow: 0 19px 38px var(--darkshadow), 0 15px 12px var(--lightshadow); }
+figure > iframe		{ box-shadow: inset 0 1px 3px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.24); }
+
+/*** Header ***/
+body > h1					{ display: none; }
+header						{ font-size: 0.9em; font-weight: 500; letter-spacing: -0.02em; }
+header, nav					{ display: flex; }
+.Logo + label img			{ display: block; }
+
+header label				{ display: flex; align-items: center; }
+header label > a,
+header label > a[href]:hover{ text-decoration: inherit; color: inherit !important; }
+header svg + a				{ margin-inline-start: calc(var(--margin) / 2); }
+
+header > label svg,
+nav > label svg				{ height: var(--tab-height); }
+.Raised + label svg			{ height: var(--icon-height); }
+.Logo + label img			{ width: calc(var(--tab-height) * var(--logo-ratio)); }
+
+.Button + label				{ margin: calc(1.25 * var(--margin)) var(--margin); }
+.Raised + label				{ padding: 0 var(--margin); border-radius: var(--margin); background-color: var(--body-bg); }
+
+.Logo + label,
+.WideButton + label,
+nav > label					{ padding: 0 var(--2margin); }
+header > input:last-of-type + label	{ padding-inline-end: var(--margin); }
+
+header label				{ color: var(--tab-inactive); }
+header input + :hover,
+header :focus + label		{ color: var(--tab-hover); background-color: var(--body-bg); }
+header :checked + label		{ color: var(--tab-active); background-color: var(--body-bg); }
+header .Flat + label		{ background-color: unset; }
+nav :checked + label		{ box-shadow: inset 0 -0.25em currentColor; }
+
+.Raised:checked + label		{ background-color: var(--tab-active); color: var(--blocks); }
+
+.Toggle.Left + label		{ margin-right: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.Toggle.Right + label		{ margin-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+
+header input:last-of-type + label,
+.WideButton + label			{ margin-inline-start: auto; }
+
+.MenuButton + label			{ display: none; }
+
+/*** SVG ***/
+header svg > g			{ stroke-width: 5; stroke: currentColor; fill: currentColor; }
+.Magnify g,
+.Toggle + label g		{ stroke-width: 9; }
+
+nav :checked + * polyline,
+nav :checked + * polygon,
+nav :checked + * rect,
+nav :checked + * circle,
+nav :checked + * path,
+nav :checked + * line		{ stroke: var(--body-bg); }
+nav :checked + * circle,
+nav :checked + * path,
+nav :checked + * polygon,
+nav :checked + * rect		{ fill: currentColor; }
+.FillMask					{ fill: var(--blocks); }
+input + label:hover .FillMask{ fill: var(--body-bg); }
+:checked + * .Dots circle	{ stroke: currentColor; }
+
+/*** Side/topbar ***/
+main						{ display: flex; }
+main > article				{ display: flex; flex-direction: column; flex-grow: 1; /* sidebar zh */ }
+aside						{ display: flex; flex-basis: var(--square); overflow: hidden; }
+.Collapse aside,
+.Reset aside				{ opacity: 0; flex-basis: 0; visibility: hidden; }
+
+/* Side bar, landscape */
+.Sidebar					{ --square-vw: 20; }
+@media (max-width: 1200px) { /* iPad width or so */
+	.Sidebar				{ --square-vw: 24; }
+}
+.Sidebar .DataRegion		{ flex-grow: 1; flex-basis: 0; /* basis 0 plus grow 1 expands to height of sibling! */ }
+.Sidebar .DataRegion > *	{ display: initial; }
+.Sidebar main				{ flex-direction: row; min-width: 0; }
+.Sidebar aside				{ flex-direction: column; flex-shrink: 0; min-width: 0; }
+.Sidebar aside figure		{ align-self: center; font-size: 2.1em; height: 3.5em; width: 3.5em; flex: unset; }
+.Sidebar aside ul > li		{ min-height: 2.5em; padding: 0 calc(var(--margin) * 1.5); }
+.Sidebar main > article		{ transition: width 0.3s linear; min-width: 0; }
+.Sidebar:not(.Reset):not(.Collapse)
+							{ --sidebar-shrink: calc(1 - (var(--square-vw) + 2) / 100); /* 2% breathing room */ }
+.Sidebar[data-wide="15"] aside > figure	{ display: none; }
+.Sidebar[data-wide="15"]
+.Sidebar.Collapse,
+.Sidebar.Reset				{ --sidebar-shrink: 1; }
+.Sidebar canvas				{ height: unset; }
+
+/*** CloseUp box ***/
+figure					{ border: var(--margin) solid rgba(var(--text), 0.08); }
+figure a				{ color: inherit; text-decoration: inherit; }
+figure:hover a			{ color: var(--tab-active); text-decoration: revert; }
+aside figure			{ font-size: 2.8em; padding: var(--margin); display: flex; flex-direction: row; justify-content: space-between; text-shadow: 0 1px 2px rgba(var(--text),0.2); flex: 0 0 calc(var(--square) - var(--2margin)); min-width: 0; white-space: nowrap; }
+figure > output			{ min-width: 0; }
+figure > output,
+figure > small			{ display: flex; flex-direction: column; justify-content: space-between; line-height: 1; }
+figure > small			{ min-width: 1.2em; /* HACK: magic number */ }
+
+/*** Radio button boxes ***/
+ul							{ display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; grid-template-rows: repeat(var(--property-rows), auto); grid-gap: 0 var(--2margin); margin: 0; scrollbar-width: none; }
+ul.CompoundResults			{ display: initial; }
+ul::-webkit-scrollbar		{ display: none; }
+.CompoundResults > li		{ flex-wrap: wrap; }
+ul > li > select			{ margin-inline-end: calc(-1 * var(--margin)); font: inherit; border: none; color: GrayText; background-color: unset; }
+ul > li > label > select	{ color: inherit; font: inherit; border: none; background-color: var(--body-bg); /* MAYBE */ }
+ul > li > a					{ text-align: end; /* push 2nd compounds right */ }
+ul > li > output			{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+ul > li.HideStart > output	{ direction: rtl; text-align: left; }
+ul > li:hover > output		{ direction: unset; white-space: initial; overflow: initial; text-align: end; }
+ul > li > a ~ a				{ flex-basis: 100%; }
+ul > li						{ display: flex; align-items: center; justify-content: flex-end; /* push sidebar compounds right */ padding: 0 var(--2margin); break-inside: avoid; outline: 0 solid var(--tab-hover); }
+aside ul > li				{ min-height: var(--row-height); }
+.DataRegion ul > li > label	{ margin-inline-end: var(--margin); white-space: nowrap; flex-grow: 1; }
+ul > li:hover				{ background-color: var(--hovered); }
+ul > input:checked + li		{ background-color: var(--selected); }
+ul:not(.CompoundResults) > li:hover				{ outline-width: var(--fixedgridgap); z-index: 2; }
+ul:not(.CompoundResults) > input:focus + li		{ outline-width: var(--fixedgridgap); outline-color: LinkText; z-index: 3; }
+.DataRegion ul > li > *		{ overflow-wrap: break-word; hyphens: auto; }
+.KeyRegion ul > li			{ overflow-wrap: anywhere; }
+
+/*** Unit selects ***/
+.electric > select:not(.electric),
+.thermal > select:not(.thermal),
+.specific > select:not(.specific),
+.vaporization > select:not(.vaporization),
+.fusion > select:not(.fusion)
+						{ display: none; }
+
+/*** Properties ***/
+.Properties				{ grid-auto-columns: 32fr 33fr 35fr; /* BUG: find less jittery values for russian: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns */ }
+
+/*** Slider ***/
+.Slider						{ position: sticky; left: var(--margin); display: flex; overflow: hidden; align-items: center; margin-inline-start: var(--margin); }
+[dir="rtl"] .Slider			{ left: unset; right: var(--margin); }
+.Slider > div,
+.Slider > label				{ margin: var(--margin) var(--2margin); }
+.Slider input[type="button"]{ padding: 0 0.1em; font-size: inherit; }
+.RangeNumbers				{ display: flex; align-items: baseline; margin: auto; white-space: nowrap; }
+.RangeNumbers > input		{ margin-inline-start: var(--margin); }
+.RangeNumbers > label		{ margin-inline-end: var(--margin); }
+input[type="number"]:out-of-range	{ background-color: #FCC; }
+
+.Slider						{ flex-basis: 0; visibility: hidden; opacity: 0; }
+.Reset .SliderTemp,
+.Property .series .SliderTemp,
+.Property .name .SliderTemp,
+.Property .state .SliderTemp,
+.Property .melt .SliderTemp,
+.Property .boil .SliderTemp,
+.Property .discover .SliderYear
+							{ flex-basis: 2.1em /* HACK: fixed size allows transition */; visibility: visible; opacity: 1; }
+.Property .name ol > li,
+.Isotope .isoname ol > li.Tope,
+.Isotope ol > li:not(.Tope)	{ cursor: pointer; }
+
+[type="number"]				{ width: 7ch; text-align: end; font-size: inherit; border: none; border-bottom: thin solid GrayText; background-color: inherit; color: inherit; }
+[type="number"]::-webkit-inner-spin-button	{ margin-left: 0.5ch; }
+[type="range"]		{ flex-grow: 1; }
+[type="range"]::-webkit-slider-runnable-track	{ border: thin solid ButtonShadow; }
+[type="range"]::-webkit-slider-thumb			{ padding: var(--track-height) 0; margin: calc(var(--track-height) / -2) 0; }
+[type="range"]::-moz-range-track				{ height: var(--track-height); border: thin solid ButtonShadow; }
+[type="range"]::-moz-range-thumb				{ padding: calc(var(--track-height) / 2) 0; }
+
+.TempRange::-webkit-slider-runnable-track	{ background: var(--heat-gradient); }
+.YearRange::-webkit-slider-runnable-track	{ background: linear-gradient(to right, var(--blocks), 75%, LinkText); }
+.TempRange::-moz-range-track				{ background: var(--heat-gradient); }
+.YearRange::-moz-range-track				{ background: linear-gradient(to right, var(--blocks), 75%, LinkText); }
+
+/*** Table ***/
+ol				{ display: grid; transform-style: preserve-3d; /* create stacking context for isotopes */ padding: calc(var(--margin)*1.5) var(--2margin) var(--2margin) var(--margin); }
+ol				{ grid-template-columns: var(--periods) repeat(var(--groups), minmax(0, 1fr)); }
+.Legend,
+ol > li			{ white-space: nowrap; padding: var(--element-pad); }
+ol li > *,
+.Legend > *,
+figure > output > *	{ line-height: 1; display: block; font-style: normal; font-weight: normal; }
+figure abbr, li > abbr	{ font-weight: 600; }
+
+/*** Element boxes ***/
+figure b,
+ol > * > b		{ font-size: 0.65em; font-weight: normal; speak: never; }
+ol > * > abbr	{ font-size: 0.9em; }
+em,
+data			{ font-size: 0.55em; }
+data			{ text-overflow: ellipsis; overflow: hidden; }
+:lang(zh) ol > * > abbr	{ font-size: 0.7em; }
+:lang(zh) ol > * > em	{ font-size: 0.75em; } /* adds up to 1.45em just like 0.9+0.55 */
+small			{ font-size: 0.38em; text-align: end; }
+
+/*** Table interior ***/
+.Period, .Group		{ color: var(--group); line-height: 1; }
+.Period				{ align-self: center; text-align: right; padding-right: calc(var(--margin) / 2); z-index: 2; }
+.Removed6, .Removed7{ margin-right: var(--fixedgridgap); }
+.Group > a			{ font-size: 0.5em; display: block; }
+.Group				{ text-align: center; }
+.Parentheses		{ font-size: 0.7em; margin: var(--margin) var(--2margin); align-self: center; }
+.Label57to71,
+.Label89to103		{ font-size: 0.65em; align-self: center; text-align: center; }
+
+/*** Grid Positioning ***/
+.KeyRegion			{ grid-column: 4 / span 10; grid-row: 2 / span 3; }
+[data-wide="15"] .KeyRegion	{ grid-column-end: span 14; }
+.G3					{ grid-column-start: calc(var(--groups) - 14); }
+.WideGap,
+.WideKeyRegion		{ display: none; }
+.VerticalInner		{ grid-column-start: 4; grid-row: 7 / span 5; }
+.Legend				{ grid-column-start: 3; grid-row-start: 2; }
+.OldSlider			{ grid-column-end: span 5; grid-row-start: 2; }
+.PosterLogo			{ grid-column: 1 / span 3; grid-row: 9 / span 3; }
+.Parentheses		{ grid-column-end: span calc(var(--groups) - 3); }
+.Removed6, .Removed7,
+.Label57to71,
+.Label89to103		{ grid-column-start: 4; pointer-events: none; }
+li.Lanthanoid, .Removed6	{ grid-row-start: 10; }
+li.Actinoid, .Removed7	{ grid-row-start: 11; }
+.Label57to71		{ grid-row-start: 7; z-index: 2; }
+.Label89to103		{ grid-row-start: 8; z-index: 2; }
+
+/*** Input/accessibility ***/
+header input[type="radio"],
+.SearchConsole input[type="radio"],
+ul input[type="radio"],
+header input[type="checkbox"]	{ position: absolute; opacity: 0; clip-path: polygon(0 0); }
+.RangeNumbers label,
+.Unknown output.Unknown			{ background-color: inherit; color: GrayText; }
+button							{ font-size: 1em; }
+
+/*** Ads ***/
+.Notice					{ display: flex; align-items: center; max-width: 100%; min-height: calc(90px + 1px + 2px); overflow: hidden; color: GrayText; padding-top: 1px; padding-bottom: 2px; }
+.Notice > div			{ display: flex; flex-direction: column; align-self: stretch; justify-content: space-between; }
+.Notice > div > button	{ margin: 0 var(--margin); align-self: flex-start; }
+.Notice > div > button::after	{ content: "✕"; }
+.Notice > div > span	{ text-align: center; }
+.Notice > div > span::before	{ content: "«Ad"; }
+.adsbygoogle			{ display: block; height: 90px; flex-grow: 1; text-align: center; margin: 0 var(--margin); z-index: 1 !important; }
+blockquote				{ padding: 0 calc(2 * var(--2margin)); font-size: min(0.8em, 32px); margin: 0; }
+blockquote > form		{ display: inline; }
+blockquote > form > *	{ font-size: inherit; }
+ins[data-adsbygoogle-status="done"] + blockquote,
+ins:not([data-adsbygoogle-status]) ~ div
+/*ins.adsbygoogle:not(:empty) + blockquote*/
+						{ display: none; }
+
+/*** Search ***/
+.SearchConsole			{ position: absolute; margin: var(--margin); transform: translateX(calc(var(--rtl) * -50%)); visibility: hidden; white-space: nowrap; }
+
+/*** Footer ***/
+footer					{ display: flex; flex-wrap: wrap; justify-content: space-between; margin: 0 calc(var(--square) + 2 * var(--2margin)); --square-vw: 20; /* recalc --square in :root or flips between 18/20vw from top/sidebar on Reset */ }
+footer > :first-child	{ display: none; }
+addr					{ flex-basis: 100%; color: GrayText; margin: var(--2margin) 0; font-size: 0.6em; text-align: center; }
+addr a					{ color: inherit; }
+footer select			{ font: inherit; }
+footer label			{ color: var(--tab-active); vertical-align: text-top; }
+footer > dl				{ break-inside: avoid; }
+footer dt				{ font-size: 0.9em; margin-bottom: var(--margin); text-transform: uppercase; letter-spacing: 0.1em; }
+footer dd				{ font-size: 0.8em; line-height: 1; margin: var(--margin) 0; }
+footer svg				{ width: 1em; margin-inline-end: 0.3em; vertical-align: bottom; }
+.FullScreen footer		{ display: none; }
+
+/*** Series Colors ***/
+.Alkali .Alkali,
+figure.Alkali			{ background-color: var(--alkali); }
+.Alkaline .Alkaline,
+figure.Alkaline			{ background-color: var(--alkaline); }
+.Lanthanoid .Lanthanoid,
+figure.Lanthanoid		{ background-color: var(--lanthanoid); }
+.Actinoid .Actinoid,
+figure.Actinoid			{ background-color: var(--actinoid); }
+.Transition .Transition,
+figure.Transition		{ background-color: var(--transition); }
+.Poor .Poor,
+figure.Poor				{ background-color: var(--poor); }
+.Metalloid .Metalloid,
+figure.Metalloid		{ background-color: var(--metalloid); }
+.Nonmetal .Nonmetal,
+figure.Nonmetal			{ background-color: var(--nonmetal); }
+.Noble .Noble,
+figure.Noble			{ background-color: var(--noble); }
+.Unknown .Unknown,
+figure.Unknown			{ background-color: var(--nocategory); }
+.VerticalInner		{ background-color: var(--divider); border-color: var(--divideroutline); }
+
+/*** Series Legend ***/
+.state .Series > *		{ background-color: transparent; }
+.Series					{ display: grid; grid-auto-flow: column; grid-template-rows: repeat(3, auto); font-size: 0.7em; min-width: 0; overflow-wrap: anywhere; }
+.Series > *				{ padding: 0.15em; display: flex; /* expands A to fill container */ }
+.Series > * > a			{ flex-grow: 1; }
+.Series > dt			{ font-weight: 600; }
+.Series > dt:not(.Metalloid):hover
+						{ background-color: var(--selected); }
+.Series > dd			{ writing-mode: vertical-rl; grid-row-end: span 2; }
+.Series > dd > a		{ display: block; max-height: 8em; /* Firefox eats line breaks otherwise */ }
+.Series > .Metals		{ grid-column-end: span 5; text-align: center; border-top-left-radius: var(--margin); border-color: rgb(var(--text)); }
+.Series > .Metalloid	{ grid-row-end: span 3; writing-mode: vertical-rl; }
+.Series > .Nonmetals	{ grid-column-end: span 2; text-align: center; border-top-right-radius: var(--margin); border-color: rgb(var(--text)); }
+.Series > .Lanthanoid,
+.Series > .Actinoid		{ writing-mode: initial; grid-row-end: span 1; }
+
+/*** State of Matter Legend ***/
+dl						{ margin: 0; }
+.StateKey				{ display: flex; flex-direction: column; justify-content: space-between; }
+.StateKey > div			{ display: flex; align-items: baseline; }
+.StateKey dt			{ width: 1.4em; line-height: 1.4; box-sizing: content-box; text-align: center; font-weight: 600; }
+.StateKey dd			{ margin-inline-start: var(--margin); white-space: nowrap; }
+
+/*** State of Matter Colors ***/
+dt.Solid, dt.Solid + dd,
+.Solid > abbr			{ color: var(--solid); }
+dt.Liquid, dt.Liquid + dd,
+.Liquid > abbr			{ color: var(--liquid); }
+dt.Gas, dt.Gas + dd,
+.Gas > abbr				{ color: var(--gas); }
+dt.UnknownState, dt.UnknownState + dd,
+.UnknownState > abbr	{ color: var(--unknown); }
+
+@keyframes solid	{ to	{ background-color: var(--solid); color: var(--blocks); } }
+@keyframes liquid	{ to	{ background-color: var(--liquid); color: var(--blocks); } }
+@keyframes gas		{ to	{ background-color: var(--gas); color: var(--blocks); } }
+@keyframes unknown	{ to	{ background-color: var(--unknown); color: var(--blocks); } }
+
+.Solid, .Solid > abbr		{ animation: solid 0s step-start; }
+.Liquid, .Liquid > abbr		{ animation: liquid 0s step-start; }
+.Gas, .Gas > abbr			{ animation: gas 0s step-start; }
+.UnknownState,
+.UnknownState > abbr		{ animation: unknown 0s step-start; }
+
+li.White, li.White > abbr	{ color: white !important; }
+li.Black, li.Black > abbr	{ color: black !important; }
+
+.Reset .Delay:not(.Shine) li,
+.Property .series .Delay li,
+.Property .name .Delay li	{ animation-duration: 1s; }
+#Ptable li > abbr			{ animation-duration: inherit; animation-iteration-count: inherit; }
+
+.Solid .Solid,
+.Liquid .Liquid,
+.Gas .Gas,
+.UnknownState .UnknownState	{ animation-duration: 5s; animation-iteration-count: infinite; }
+
+.state dt					{ animation-fill-mode: forwards; }
+
+html:not(.Property):not(.Reset) abbr,
+.Property article:not(.name):not(.series):not(.melt):not(.boil) abbr
+							{ color: rgb(var(--text)); }
+
+/*** Borders and Gaps ***/
+ol > li,
+.Series > dd, .Series > .Metalloid,
+.CompoundDragTarget li
+					{ border-color: var(--bordercolor); }
+.StateOfMatter dt,
+.PropertyKey > dl,
+.Blocks dt,
+.ConfigBlocks > div > div > div,
+.CompoundDragTarget li,
+.Series > *,
+.VerticalInner		{ border-width: var(--border-width); border-style: solid; }
+.Series > .Nonmetals,
+.Series > .Metals	{ border-bottom: none; }
+
+.Legend				{ border-color: transparent; }
+.Legend,
+ol > li:not(.Tope)	{ border-width: var(--fixedborderwidth); border-style: solid; outline: 0 solid var(--tab-hover); }
+.VerticalInner		{ border-radius: var(--border-width); box-shadow: 0 0 0 var(--border-width) var(--divideroutline); }
+ol					{ grid-gap: var(--gridgap); }
+.Series				{ grid-gap: var(--fixedgridgap); }
+.StateOfMatter dt	{ border-color: rgb(var(--text)); }
+
+/*** Margins ***/
+header				{ margin-bottom: var(--margin); }
+.Notice				{ margin: var(--2margin) var(--margin) 0; }
+main,
+ol,
+figure				{ margin: var(--margin); }
+
+/*** Legend and Data holders ***/
+.KeyRegion					{ contain: size; }
+.KeyRegion a				{ color: inherit !important; }
+.DataRegion					{ position: relative; /* for gradients */ }
+.DataRegion::before			{ background: linear-gradient(to bottom, var(--body-bg), var(--body-bg-trans)); content: ""; position: absolute; height: var(--margin); top: 0; left: 0; right: 0; z-index: 2; }
+.DataRegion::after			{ background: linear-gradient(to top, var(--body-bg), var(--body-bg-trans)); content: ""; position: absolute; height: var(--margin); bottom: 0; left: 0; right: 0; }
+.KeyRegion, .DataRegion		{ display: flex; overflow-x: hidden; /* overflow-x: scroll; -ms-overflow-style: none; scroll-snap-type: mandatory; scroll-snap-stop: always; scrollbar-width: none; scroll-snap-points-x: repeat(100%); scroll-snap-type: x mandatory; -ms-scroll-snap-type: mandatory; */ }
+.KeyRegion > *				{ display: flex; padding: var(--2margin); }
+.KeyRegion > :not(.IsotopeKey)	{ gap: var(--2margin); }
+.DataRegion > *				{ padding: var(--margin); overflow-y: auto /*overlay*/; font-size: 0.65em; }
+.DataRegion > *,
+.KeyRegion > *				{ min-width: 100%; /* scroll-snap-align: start; */ }
+
+.SeriesState,
+.PropertyKey,
+.ElectronKey,
+.IsotopeKey > *,
+.CompoundKey				{ justify-content: space-evenly; } /* PropertyKey > :not(.IsotopeKey) ? */
+
+/* Top bar, default */
+main						{ flex-direction: column; }
+aside						{ flex-direction: row; }
+
+/* Height-width auto scaling */
+body > *					{ padding: 0 min((100% - 100 * var(--aspect-ratio)) / 2, (100% - var(--min) / var(--sidebar-shrink) * var(--groupfactor) - var(--2margin)) / 2); /* from ol min-width */ }
+
+html						{ font-size: calc(var(--base-vw) * var(--aspect-ratio)); }
+.Slider,
+.DataRegion,				/* Next 3 get sidebar-shrink since they shrink when it's is active */
+.SearchConsole				{ font-size: calc(var(--base-vw) * var(--aspect-ratio) * var(--sidebar-shrink)); }
+							/* Include groupfactor since Table shrinks when it goes wide */
+ol							{ font-size: calc(var(--base-vw) * var(--aspect-ratio) * var(--sidebar-shrink) / var(--groupfactor));
+							/* minfont already takes into account sidebar so undo it by multiplying so table is 768px wide minimum. */
+							  min-width: calc(var(--min) * var(--groupfactor) - 2 * var(--2margin)); }
+
+:root						{ --aspect-ratio: 1vw; --square: calc(var(--square-vw) * var(--aspect-ratio)); /* no min/max, fit to width only */ }
+@supports (font-size: min(1vw, 1vh)) {
+	:root, footer /* recalc */	{ --square:	calc(var(--square-vw) * max(var(--min) / var(--sidebar-shrink) / 100, var(--aspect-ratio))); }
+	html						{ font-size: max(var(--base-vw) * var(--aspect-ratio), var(--minfont)); }
+	.Slider,
+	.DataRegion,				/* Next 3 get sidebar-shrink since they shrink when it's is active */
+	.SearchConsole				{ font-size: max(var(--base-vw) * var(--aspect-ratio) * var(--sidebar-shrink), var(--minfont)); }
+	ol							{ font-size: max(var(--base-vw) * var(--aspect-ratio) * var(--sidebar-shrink) / var(--groupfactor), var(--minfont) * var(--sidebar-shrink)); }
+								/* minfont already takes into account sidebar so undo it by multiplying so table is 768px wide minimum. */
+	:root						{ --aspect-ratio: min(1vw, 1.183vh + (var(--groups) - 18) * 0.05vh); }	/* 1st vh: topbar, 2nd: topbar + wide */
+	.Sidebar					{ --aspect-ratio: min(1vw, 1.85vh + (var(--groups) - 18) * 0.109vh); }	/* 1st vh: sidebar, 2nd: sidebar + wide */
+	.Reset						{ --aspect-ratio: min(1vw, 1.51vh + (var(--groups) - 18) * 0.095vh); }	/* 1st vh: reset, 2nd: reset + wide */
+}
+
+@media (max-width: 768px) { /* Also in --min */
+	main > article			{ overflow-x: auto; }
+}
+@media (max-width: 1365px) { /* --min * --groupfactor */
+	:root:not([data-wide="0"]) main > article { overflow-x: auto; }
+}
+
+@media (max-width: 550px), (display-mode: standalone) {
+	.MenuButton + label		{ display: flex; padding-inline-start: var(--margin); }
+	footer					{ display: flex; flex-direction: column; visibility: hidden; transform: translateX(calc(var(--rtl) * -100%)); z-index: 2; position: absolute; top: calc(1.25 * var(--2margin) + var(--tab-height)); bottom: 0; font-size: 3vh; margin: 0; padding: 3vh; background-color: inherit; box-shadow: 0 19px 38px var(--darkshadow), 0 15px 12px var(--lightshadow); }
+	addr					{ flex-basis: unset; }
+	addr > span				{ display: none; }
+	footer.Menu				{ transform: translateX(0); visibility: visible; }
+}
+
+@media (max-width: 550px) {
+	/* Mobile */
+	:root {
+		--square:			33vh;
+		--min-rows:			2.5;
+		--margin:			1.7vw;
+		--icon-height:		5vw;
+		--track-height:		var(--2margin);
+		--bordercolor:		transparent;
+		--element-pad:		0.15em;
+	}
+	.KeyRegion {
+		--margin:			4.5px; /* Table has a min-width on mobile of 1024 pixels? */
+		--2margin:			calc(var(--margin) * 2);
+	}
+	:root.Dark { }
+
+	html, body				{ background-color: var(--blocks); }
+	header, .Slider			{ background-color: var(--body-bg); }
+	header, aside			{ min-width: unset; }
+	footer > :first-child	{ display: initial; }
+	.Notice					{ margin: var(--margin) 0; padding: 0; min-height: 100px; /* 300x100 mobile ad slot */ }
+	.adsbygoogle			{ height: 100px; }
+	blockquote				{ font-size: min(1em, 14px); }
+	blockquote > span		{ display: none; }
+
+	aside					{ min-height: calc(var(--row-height) * var(--min-rows)); }
+	aside canvas			{ height: unset; }
+	.Reset aside			{ --min-rows: 0; }
+	main aside figure		{ display: none; }
+	.DataRegion > *, .Slider{ font-size: 120%; padding: 0; }
+	nav						{ --tab-height: 6vw; position: fixed; bottom: 0; width: 100%; z-index: 2; align-items: center; background-color: inherit; }
+	.adsbygoogle[data-adsbygoogle-status="done"],
+	nav :checked + label	{ box-shadow: none; }
+	nav > label				{ flex-direction: column; text-align: center; flex-basis: calc(100% / 4); }
+	header > label			{ color: var(--group); }
+	header > * > svg + a	{ display: none; }
+	header svg + a			{ margin-inline-start: 0; }
+	.FillMask				{ fill: var(--body-bg); }
+
+	.Raised + label			{ display: none; }
+	.MenuButton + label		{ margin-inline-end: auto; }
+
+	.RangeNumbers input:not([data-unit="C"]),
+	.RangeNumbers input:not([data-unit="C"]) + label	{ display: none; } /* FIX: Show temp matching their degree dropdown */
+
+	section.SearchConsole				{ z-index: 2; top: 0; width: 100%; align-items: center; margin: 0; justify-content: flex-end; opacity: 0; transform: none; }
+	div.SearchAnchor					{ margin-inline-start: unset; }
+	.SearchActive header				{ position: sticky; top: 0; z-index: 2; }
+	.SearchActive .SearchConsole		{ position: fixed; pointer-events: none; opacity: 1; padding-inline-start: calc(3 * var(--2margin) + var(--tab-height) + var(--tab-height) * var(--logo-ratio)); padding-inline-end: calc(4 * var(--margin) + var(--tab-height)); }
+	.SearchActive .MenuButton + label	{ margin-inline-end: 0; }
+	.SearchActive .SearchConsole ul		{ display: none; }
+	.SearchConsole > [type=search]		{ max-width: 0; }
+	.SearchActive [type=search]			{ max-width: 100%; pointer-events: auto; }
+
+	ol, nav					{ box-shadow: 0 1px 3px var(--lightshadow), 0 1px 2px var(--darkshadow); }
+	main, main > article, ol{ margin: 0; }
+
+	.DataRegion::before		{ background: none; box-shadow: inset 0 0 4px var(--lightshadow), inset 0 0 3px var(--darkshadow); bottom: 0; height: unset; pointer-events: none; }
+	.DataRegion::after		{ display: none; }
+	.DataRegion ul			{ display: initial; }
+	.Electrons #orbital_lmn	{ white-space: unset; }
+	article .Slider			{ touch-action: pan-y pinch-zoom; left: 0; margin-inline-start: 0; }
+	[dir="rtl"] article .Slider	{ left: unset; right: 0; }
+	.Slider [type="button"]	{ display: none; }
+
+	nav						{ height: 12vw; }
+	header, .SearchConsole	{ height: 12vw; margin-bottom: 0; }
+	footer					{ top: 12vw; }
+	main					{ max-height: calc(100vh - 12vw); }
+	main > article			{ flex-shrink: 0; margin-bottom: 12vw; min-height: calc(var(--min) / 1.8); /* reserved to minimize CLS */ }
+
+	ol > li > abbr,
+	ol > li:not(.Tope),
+	ul > input:checked + li	{ transition: none !important; }
+	.SearchActive article ol,
+	ol.Tilt					{ transform: none; }
+}
+
+/* font-variant-numeric: tabular-nums; MAYBE */
+  </style>
+  <link rel="stylesheet" href="./元素周期表_files/interactive-8244c80.css" media="all" onload="this.media=&#39;all&#39;; this.onload = null;">
+
+  <script nomodule="">window.location.replace("https://old.ptable.com/");</script>
+  <script type="module">
+  if (!("reversed" in document.createElement("ol"))) window.location.replace("https://old.ptable.com/");
+  window.reportError = function(e) {
+  	if (window.Bugsnag) window.Bugsnag.notify(e);
+  	else console.log(e);
+  }
+  </script>
+
+  <script type="module" src="/元素周期表_files/required-558b88c3.js.下载" crossorigin=""></script>
+  <link rel="modulepreload" href="https://ptable.com/js/bugsnag-f0c206ee.js">
+  <link rel="modulepreload" href="https://ptable.com/js/extra-4bfde388.js">
+ <input type="hidden" id="_w_simile" data-inspect-config="3"><script type="text/javascript" src="chrome-extension://odphnbhiddhdpoccbialllejaajemdio/scripts/inspector.js"></script><script src="/元素周期表_files/f.txt" crossorigin="anonymous" defer="" data-checked-head="true"></script><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A9uiHDzQFAhqALUhTgTYJcz9XrGH2y0/9AORwCSapUO/f7Uh7ysIzyszNkuWDLqNYg8446Uj48XIstBW1qv/wAQAAACNeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiRmxlZGdlQmlkZGluZ0FuZEF1Y3Rpb25TZXJ2ZXIiLCJleHBpcnkiOjE3Mjc4MjcxOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A9R+gkZL3TWq+Z7RJ2L0c7ZN7FZD5z4mHmVvjrPitg/EMz9P3j5d3W7Vw5ZR9jtJGmWKltM4BO3smNzpCgwYuwwAAACTeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiRmxlZGdlQmlkZGluZ0FuZEF1Y3Rpb25TZXJ2ZXIiLCJleHBpcnkiOjE3Mjc4MjcxOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"></head>
+ <body>
+ <!-- toggled classes: Overlay, SearchActive -->
+</a>
+<main class="AlphaEmission ProtonEmission TwoProtonEmission NeutronEmission TwoNeutronEmission SpontaneousFission BetaDecay DoubleBetaDecay BetaPlusDecay DoubleBetaPlusDecay ElectronCapture Stable" data-default="AlphaEmission ProtonEmission TwoProtonEmission NeutronEmission TwoNeutronEmission SpontaneousFission BetaDecay DoubleBetaDecay BetaPlusDecay DoubleBetaPlusDecay ElectronCapture Stable">
+<!-- toggled classes: [DecayMode WIPED] -->
+
+
+
+<article id="PropertyClass" class="series"> <!-- Nested so flex-direction can treat this as a group when flipping from top to sidebar. -->
+<!-- toggled classes: [property WIPED] -->
+
+ 
+
+ 
+
+<h2><span class="hand">您是第</span><a href="https://www.cutercounter.com/" target="_blank"><img src="https://www.cutercounter.com/hits.php?id=hxqxqkd&nd=5&style=5"></a></a><span class="hand">个访问本网站的人。</span></h2>
+
+<ol id="Ptable" class="Hover Nonmetal Noble Alkali Alkaline Lanthanoid Actinoid Transition Poor Metalloid Unknown s p d f" data-classes="Alkali Alkaline Lanthanoid Actinoid Transition Poor Metalloid Nonmetal Noble Unknown s p d f" dir="ltr">
+<!-- toggled classes: Hover, Fanned, Tilt, Delay, Shine, [Series], [Block] -->
+<div class="Group"></div>
+<div class="Group" data-num="1">1</div>
+<div class="Group" data-num="2">2</div>
+<div class="Group G3" data-num="3">3</div>
+<div class="Group" data-num="4">4</div>
+<div class="Group" data-num="5">5</div>
+<div class="Group" data-num="6">6</div>
+<div class="Group" data-num="7">7</div>
+<div class="Group" data-num="8">8</div>
+<div class="Group" data-num="9">9</div>
+<div class="Group" data-num="10">10</div>
+<div class="Group" data-num="11">11</div>
+<div class="Group" data-num="12">12</div>
+<div class="Group" data-num="13">13</div>
+<div class="Group" data-num="14">14</div>
+<div class="Group"><span data-num="15">15</span><a href="https://zh.wikipedia.org/wiki/%E6%B0%AE%E6%97%8F%E5%85%83%E7%B4%A0">氮族元素</a></div>
+<div class="Group"><span data-num="16">16</span><a href="https://zh.wikipedia.org/wiki/%E6%B0%A7%E6%97%8F%E5%85%83%E7%B4%A0">氧族元素</a></div>
+<div class="Group"><span data-num="17">17</span><a href="https://zh.wikipedia.org/wiki/%E5%8D%A4%E7%B4%A0">卤素</a></div>
+<div class="Group" data-num="18">18</div>
+<section id="KeyRegion" class="KeyRegion" dir="ltr">
+<div id="SeriesState" class="SeriesState">
+ <dl id="StateOfMatter" class="StateKey StateOfMatter">
+  <div>
+   <dt class="Solid" data-state="固体">C</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E5%9B%BA%E4%BD%93" tabindex="0">固体</a></dd>
+  </div>
+  <div>
+   <dt class="Liquid" data-state="液体">Hg</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E6%B6%B2%E4%BD%93" tabindex="0">液体</a></dd>
+  </div>
+  <div>
+   <dt class="Gas" data-state="气体">H</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E6%B0%94%E4%BD%93" tabindex="0">气体</a></dd>
+  </div>
+  <div>
+   <dt class="UnknownState" data-state="未知">Rf</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E6%9C%AA%E7%9F%A5" tabindex="0">未知</a></dd>
+  </div>
+ </dl>
+ <dl id="Series" class="Series" dir="ltr">
+  <dt class="Metals" data-classes="Alkali Alkaline Lanthanoid Actinoid Transition Poor"><a href="https://zh.wikipedia.org/wiki/%E9%87%91%E5%B1%9E" tabindex="0">金属</a></dt>
+  <dd class="Alkali"><a href="https://zh.wikipedia.org/wiki/%E7%A2%B1%E9%87%91%E5%B1%9E" tabindex="0">碱金属</a></dd>
+  <dd class="Alkaline"><a href="https://zh.wikipedia.org/wiki/%E7%A2%B1%E5%9C%9F%E9%87%91%E5%B1%9E" tabindex="0">碱土金属</a></dd>
+  <dd class="Lanthanoid"><a href="https://zh.wikipedia.org/wiki/%E9%95%A7%E7%B3%BB%E5%85%83%E7%B4%A0" tabindex="0">镧系元素</a></dd>
+  <dd class="Actinoid"><a href="https://zh.wikipedia.org/wiki/%E9%94%95%E7%B3%BB%E5%85%83%E7%B4%A0" tabindex="0">锕系元素</a></dd>
+  <dd class="Transition"><a href="https://zh.wikipedia.org/wiki/%E8%BF%87%E6%B8%A1%E9%87%91%E5%B1%9E" tabindex="0">过渡金属</a></dd>
+  <dd class="Poor"><a href="https://zh.wikipedia.org/wiki/%E8%B4%AB%E9%87%91%E5%B1%9E" tabindex="0">贫金属</a></dd>
+  <dt class="Metalloid"><a href="https://zh.wikipedia.org/wiki/%E7%B1%BB%E9%87%91%E5%B1%9E" tabindex="0">类金属</a></dt>
+  <dt class="Nonmetals" data-classes="Nonmetal Noble"><a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E9%87%91%E5%B1%9E" tabindex="0">非金属</a></dt>
+  <dd class="Nonmetal"><a href="https://zh.wikipedia.org/wiki/%E6%B4%BB%E6%B3%BC%E9%9D%9E%E9%87%91%E5%B1%9E" tabindex="0">活泼非金属</a></dd>
+  <dd class="Noble"><a href="https://zh.wikipedia.org/wiki/%E7%A8%80%E6%9C%89%E6%B0%94%E4%BD%93" tabindex="0">稀有气体</a></dd>
+ </dl>
+</div>
+
+<div id="PropertyKey" class="PropertyKey NoSelect">
+ <dl class="Colors">
+  <legend>颜色</legend>
+  <div>
+   <div>
+    <div><label for="SchemeStart">Minimum</label> <input type="color" name="SchemeStart" id="SchemeStart" tabindex="-1"></div>
+    <div><label for="SchemeZero">Zero</label> <input type="color" name="SchemeZero" id="SchemeZero" tabindex="-1"></div>
+    <div><label for="SchemeEnd">Maximum</label> <input type="color" name="SchemeEnd" id="SchemeEnd" tabindex="-1"></div>
+   </div>
+   <div id="RangeGradient"></div>
+  </div>
+  <div>
+   <div>
+    <div><label for="SchemeUnknown">未知</label> <input type="color" name="SchemeUnknown" id="SchemeUnknown" tabindex="-1"></div>
+   </div>
+   <div id="UnknownSwatch"></div>
+  </div>
+ </dl>
+
+<!--
+ <dl>
+  <legend>Scheme</legend>
+  <ul>
+   <input id="SchemeReset" type="button" value="Reset">
+   <input type="button" value="Save">
+  </ul>
+ </dl>
+-->
+
+ <dl>
+  <legend>尺度</legend>
+  <ul id="SchemeScale" class="SchemeScale">
+   <input type="radio" name="SchemeScale" id="Linear" value="lin" tabindex="-1">
+   <li><label for="Linear">線性關係</label></li>
+
+   <input type="radio" name="SchemeScale" id="Logarithmic" value="log" tabindex="-1">
+   <li><label for="Logarithmic">對數尺度</label></li>
+<!--
+   <input type="radio" name="SchemeScale" id="Exponential" value="exp">
+   <li><label for="Exponential">Exponential</label></li>
+-->
+  </ul>
+ </dl>
+</div>
+
+<div class="ElectronKey NoSelect">
+ <dl id="Blocks" class="StateKey Blocks">
+  <div>
+   <dt class="s">s</dt>
+   <dd>区</dd>
+  </div>
+  <div>
+   <dt class="p">p</dt>
+   <dd>区</dd>
+  </div>
+  <div>
+   <dt class="d">d</dt>
+   <dd>区</dd>
+  </div>
+  <div>
+   <dt class="f">f</dt>
+   <dd>区</dd>
+  </div>
+ </dl>
+
+ <div id="ConfigBlocks" class="ConfigBlocks" dir="ltr">
+  <div class="BlockS">
+   <div><span>1s</span> <div tabindex="-1"></div></div>
+   <div><span>2s</span> <div tabindex="-1"></div></div>
+   <div><span>3s</span> <div tabindex="-1"></div></div>
+   <div><span>4s</span> <div tabindex="-1"></div></div>
+   <div><span>5s</span> <div tabindex="-1"></div></div>
+   <div><span>6s</span> <div tabindex="-1"></div></div>
+   <div><span>7s</span> <div tabindex="-1"></div></div>
+  </div>
+  <div class="BlockP">
+   <div><span>2p</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>3p</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>4p</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>5p</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>6p</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>7p</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+  </div>
+  <div class="BlockD">
+   <div><span>3d</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>4d</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>5d</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>6d</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+  </div>
+  <div class="BlockF">
+   <div><span>4f</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+   <div><span>5f</span> <div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div><div tabindex="-1"></div></div>
+  </div>
+ </div>
+</div>
+
+<div class="IsotopeKey NoSelect">
+ <div data-placeholder="选择元素以显示所有同位素"></div>
+ <!--
+ <div>
+  <dl class="Colors">
+  <legend>Colors</legend>
+  <div>
+   <div>
+    <div><label for="SchemeStart">Min</label> <input type="color" name="SchemeStart" id="SchemeStart"></div>
+    <div><label for="SchemeZero">Zero</label> <input type="color" name="SchemeZero" id="SchemeZero"></div>
+    <div><label for="SchemeEnd">Max</label> <input type="color" name="SchemeEnd" id="SchemeEnd"></div>
+   </div>
+   <div id="RangeGradient"></div>
+  </div>
+  <div>
+   <div>
+    <div><label for="SchemeUnknown">N/A</label> <input type="color" name="SchemeUnknown" id="SchemeUnknown"></div>
+   </div>
+   <div id="UnknownSwatch"></div>
+  </div>
+ </dl> -->
+ <dl id="DecayModes" class="DecayModes StateKey">
+  <div>
+   <dt class="AlphaEmission">α</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%CE%B1%E8%A1%B0%E5%8F%98" tabindex="-1">α衰变</a></dd>
+  </div>
+  <div>
+   <dt class="TwoProtonEmission ProtonEmission">p</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E8%B4%A8%E5%AD%90%E5%8F%91%E5%B0%84" tabindex="-1">质子发射</a></dd>
+  </div>
+  <div>
+   <dt class="TwoNeutronEmission NeutronEmission">n</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%AD%90%E7%99%BC%E5%B0%84" tabindex="-1">中子發射</a></dd>
+  </div>
+  <div>
+   <dt class="SpontaneousFission">SF</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E7%99%BC%E8%A3%82%E8%AE%8A" tabindex="-1">自發裂變</a></dd>
+  </div>
+  <div>
+   <dt class="DoubleBetaDecay BetaDecay">β⁻</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%CE%92%E8%A1%B0%E5%8F%98" tabindex="-1">Β衰变</a></dd>
+  </div>
+  <div>
+   <dt class="DoubleBetaPlusDecay BetaPlusDecay">β⁺</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E7%94%B5%E5%AD%90%E5%8F%91%E5%B0%84" tabindex="-1">正电子发射</a></dd>
+  </div>
+  <div>
+   <dt class="ElectronCapture">ϵ</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E7%94%B5%E5%AD%90%E4%BF%98%E8%8E%B7" tabindex="-1">电子俘获</a></dd>
+  </div>
+  <div>
+   <dt class="Stable">&nbsp;</dt>
+   <dd><a href="https://zh.wikipedia.org/wiki/%E7%A8%B3%E5%AE%9A%E5%90%8C%E4%BD%8D%E7%B4%A0" tabindex="-1">稳定同位素</a></dd>
+  </div>
+  <button id="RemoveIsotopes">✕</button>
+ </dl>
+<!-- </div>-->
+</div>
+
+<div class="CompoundKey NoSelect">
+ <div id="CompoundDragTarget" class="CompoundDragTarget" data-placeholder="在此拖放元素以合成化合物" data-placeholder-click="Select elements to create compounds"></div>
+</div>
+
+</section> <!-- KeyRegion -->
+<div class="WideKeyRegion"></div>
+
+<div class="OldSlider"></div>
+
+<div id="Legend" class="Legend">
+<b>序号</b>
+<abbr>符號</abbr>
+<em>名称</em>
+<data>重量</data>
+</div>
+<div class="Period" data-num="1">1</div>
+<li class="Nonmetal s Gas" data-atomic="1" tabindex="0">
+	<b>1</b>
+	<abbr>H</abbr>
+	<em>氢</em>
+	<data data-abridged="1.008">1.008</data>
+</li>
+<li class="Noble s Gas" data-atomic="2" tabindex="0">
+	<b>2</b>
+	<abbr>He</abbr>
+	<em>氦</em>
+	<data data-abridged="4.0026">4.0026</data>
+</li>
+<div class="Period" data-num="2">2</div>
+<li class="Alkali s Solid" data-atomic="3" tabindex="0">
+	<b>3</b>
+	<abbr>Li</abbr>
+	<em>锂</em>
+	<data data-abridged="6.94">6.94</data>
+</li>
+<li class="Alkaline s Solid" data-atomic="4" tabindex="0">
+	<b>4</b>
+	<abbr>Be</abbr>
+	<em>铍</em>
+	<data data-abridged="9.0122">9.0122</data>
+</li>
+<li class="Metalloid p Solid" data-atomic="5" tabindex="0">
+	<b>5</b>
+	<abbr>B</abbr>
+	<em>硼</em>
+	<data data-abridged="10.81">10.81</data>
+</li>
+<li class="Nonmetal p Solid" data-atomic="6" tabindex="0">
+	<b>6</b>
+	<abbr>C</abbr>
+	<em>碳</em>
+	<data data-abridged="12.011">12.011</data>
+</li>
+<li class="Nonmetal p Gas" data-atomic="7" tabindex="0">
+	<b>7</b>
+	<abbr>N</abbr>
+	<em>氮</em>
+	<data data-abridged="14.007">14.007</data>
+</li>
+<li class="Nonmetal p Gas" data-atomic="8" tabindex="0">
+	<b>8</b>
+	<abbr>O</abbr>
+	<em>氧</em>
+	<data data-abridged="15.999">15.999</data>
+</li>
+<li class="Nonmetal p Gas" data-atomic="9" tabindex="0">
+	<b>9</b>
+	<abbr>F</abbr>
+	<em>氟</em>
+	<data data-abridged="18.998">18.998</data>
+</li>
+<li class="Noble p Gas" data-atomic="10" tabindex="0">
+	<b>10</b>
+	<abbr>Ne</abbr>
+	<em>氖</em>
+	<data data-abridged="20.180">20.180</data>
+</li>
+<div class="Period" data-num="3">3</div>
+<li class="Alkali s Solid" data-atomic="11" tabindex="0">
+	<b>11</b>
+	<abbr>Na</abbr>
+	<em>钠</em>
+	<data data-abridged="22.990">22.990</data>
+</li>
+<li class="Alkaline s Solid" data-atomic="12" tabindex="0">
+	<b>12</b>
+	<abbr>Mg</abbr>
+	<em>镁</em>
+	<data data-abridged="24.305">24.305</data>
+</li>
+<li class="Poor p Solid" data-atomic="13" tabindex="0">
+	<b>13</b>
+	<abbr>Al</abbr>
+	<em>铝</em>
+	<data data-abridged="26.982">26.982</data>
+</li>
+<li class="Metalloid p Solid" data-atomic="14" tabindex="0">
+	<b>14</b>
+	<abbr>Si</abbr>
+	<em>硅</em>
+	<data data-abridged="28.085">28.085</data>
+</li>
+<li class="Nonmetal p Solid" data-atomic="15" tabindex="0">
+	<b>15</b>
+	<abbr>P</abbr>
+	<em>磷</em>
+	<data data-abridged="30.974">30.974</data>
+</li>
+<li class="Nonmetal p Solid" data-atomic="16" tabindex="0">
+	<b>16</b>
+	<abbr>S</abbr>
+	<em>硫</em>
+	<data data-abridged="32.06">32.06</data>
+</li>
+<li class="Nonmetal p Gas" data-atomic="17" tabindex="0">
+	<b>17</b>
+	<abbr>Cl</abbr>
+	<em>氯</em>
+	<data data-abridged="35.45">35.45</data>
+</li>
+<li class="Noble p Gas" data-atomic="18" tabindex="0">
+	<b>18</b>
+	<abbr>Ar</abbr>
+	<em>氩</em>
+	<data data-abridged="39.948">39.948</data>
+</li>
+<div class="Period" data-num="4">4</div>
+<li class="Alkali s Solid" data-atomic="19" tabindex="0">
+	<b>19</b>
+	<abbr>K</abbr>
+	<em>钾</em>
+	<data data-abridged="39.098">39.098</data>
+</li>
+<li class="Alkaline s Solid" data-atomic="20" tabindex="0">
+	<b>20</b>
+	<abbr>Ca</abbr>
+	<em>钙</em>
+	<data data-abridged="40.078">40.078</data>
+</li>
+<div class="WideGap"></div>
+<li class="Transition d Solid" data-atomic="21" tabindex="0">
+	<b>21</b>
+	<abbr>Sc</abbr>
+	<em>钪</em>
+	<data data-abridged="44.956">44.956</data>
+</li>
+<li class="Transition d Solid" data-atomic="22" tabindex="0">
+	<b>22</b>
+	<abbr>Ti</abbr>
+	<em>钛</em>
+	<data data-abridged="47.867">47.867</data>
+</li>
+<li class="Transition d Solid" data-atomic="23" tabindex="0">
+	<b>23</b>
+	<abbr>V</abbr>
+	<em>钒</em>
+	<data data-abridged="50.942">50.942</data>
+</li>
+<li class="Transition d Solid" data-atomic="24" tabindex="0">
+	<b>24</b>
+	<abbr>Cr</abbr>
+	<em>铬</em>
+	<data data-abridged="51.996">51.996</data>
+</li>
+<li class="Transition d Solid" data-atomic="25" tabindex="0">
+	<b>25</b>
+	<abbr>Mn</abbr>
+	<em>锰</em>
+	<data data-abridged="54.938">54.938</data>
+</li>
+<li class="Transition d Solid" data-atomic="26" tabindex="0">
+	<b>26</b>
+	<abbr>Fe</abbr>
+	<em>铁</em>
+	<data data-abridged="55.845">55.845</data>
+</li>
+<li class="Transition d Solid" data-atomic="27" tabindex="0">
+	<b>27</b>
+	<abbr>Co</abbr>
+	<em>钴</em>
+	<data data-abridged="58.933">58.933</data>
+</li>
+<li class="Transition d Solid" data-atomic="28" tabindex="0">
+	<b>28</b>
+	<abbr>Ni</abbr>
+	<em>镍</em>
+	<data data-abridged="58.693">58.693</data>
+</li>
+<li class="Transition d Solid" data-atomic="29" tabindex="0">
+	<b>29</b>
+	<abbr>Cu</abbr>
+	<em>铜</em>
+	<data data-abridged="63.546">63.546</data>
+</li>
+<li class="Transition d Solid" data-atomic="30" tabindex="0">
+	<b>30</b>
+	<abbr>Zn</abbr>
+	<em>锌</em>
+	<data data-abridged="65.38">65.38</data>
+</li>
+<li class="Poor p Solid" data-atomic="31" tabindex="0">
+	<b>31</b>
+	<abbr>Ga</abbr>
+	<em>镓</em>
+	<data data-abridged="69.723">69.723</data>
+</li>
+<li class="Metalloid p Solid" data-atomic="32" tabindex="0">
+	<b>32</b>
+	<abbr>Ge</abbr>
+	<em>锗</em>
+	<data data-abridged="72.630">72.630</data>
+</li>
+<li class="Metalloid p Solid" data-atomic="33" tabindex="0">
+	<b>33</b>
+	<abbr>As</abbr>
+	<em>砷</em>
+	<data data-abridged="74.922">74.922</data>
+</li>
+<li class="Nonmetal p Solid" data-atomic="34" tabindex="0">
+	<b>34</b>
+	<abbr>Se</abbr>
+	<em>硒</em>
+	<data data-abridged="78.971">78.971</data>
+</li>
+<li class="Nonmetal p Liquid" data-atomic="35" tabindex="0">
+	<b>35</b>
+	<abbr>Br</abbr>
+	<em>溴</em>
+	<data data-abridged="79.904">79.904</data>
+</li>
+<li class="Noble p Gas" data-atomic="36" tabindex="0">
+	<b>36</b>
+	<abbr>Kr</abbr>
+	<em>氪</em>
+	<data data-abridged="83.798">83.798</data>
+</li>
+<div class="Period" data-num="5">5</div>
+<li class="Alkali s Solid" data-atomic="37" tabindex="0">
+	<b>37</b>
+	<abbr>Rb</abbr>
+	<em>铷</em>
+	<data data-abridged="85.468">85.468</data>
+</li>
+<li class="Alkaline s Solid" data-atomic="38" tabindex="0">
+	<b>38</b>
+	<abbr>Sr</abbr>
+	<em>锶</em>
+	<data data-abridged="87.62">87.62</data>
+</li>
+<li class="Transition d Solid" data-atomic="39" tabindex="0">
+	<b>39</b>
+	<abbr>Y</abbr>
+	<em>钇</em>
+	<data data-abridged="88.906">88.906</data>
+</li>
+<li class="Transition d Solid" data-atomic="40" tabindex="0">
+	<b>40</b>
+	<abbr>Zr</abbr>
+	<em>锆</em>
+	<data data-abridged="91.224">91.224</data>
+</li>
+<li class="Transition d Solid" data-atomic="41" tabindex="0">
+	<b>41</b>
+	<abbr>Nb</abbr>
+	<em>铌</em>
+	<data data-abridged="92.906">92.906</data>
+</li>
+<li class="Transition d Solid" data-atomic="42" tabindex="0">
+	<b>42</b>
+	<abbr>Mo</abbr>
+	<em>钼</em>
+	<data data-abridged="95.95">95.95</data>
+</li>
+<li class="Transition d Solid" data-atomic="43" tabindex="0">
+	<b>43</b>
+	<abbr>Tc</abbr>
+	<em>锝</em>
+	<data data-abridged="98" data-unstable="1">(98)</data>
+</li>
+<li class="Transition d Solid" data-atomic="44" tabindex="0">
+	<b>44</b>
+	<abbr>Ru</abbr>
+	<em>钌</em>
+	<data data-abridged="101.07">101.07</data>
+</li>
+<li class="Transition d Solid" data-atomic="45" tabindex="0">
+	<b>45</b>
+	<abbr>Rh</abbr>
+	<em>铑</em>
+	<data data-abridged="102.91">102.91</data>
+</li>
+<li class="Transition d Solid" data-atomic="46" tabindex="0">
+	<b>46</b>
+	<abbr>Pd</abbr>
+	<em>钯</em>
+	<data data-abridged="106.42">106.42</data>
+</li>
+<li class="Transition d Solid" data-atomic="47" tabindex="0">
+	<b>47</b>
+	<abbr>Ag</abbr>
+	<em>银</em>
+	<data data-abridged="107.87">107.87</data>
+</li>
+<li class="Transition d Solid" data-atomic="48" tabindex="0">
+	<b>48</b>
+	<abbr>Cd</abbr>
+	<em>镉</em>
+	<data data-abridged="112.41">112.41</data>
+</li>
+<li class="Poor p Solid" data-atomic="49" tabindex="0">
+	<b>49</b>
+	<abbr>In</abbr>
+	<em>铟</em>
+	<data data-abridged="114.82">114.82</data>
+</li>
+<li class="Poor p Solid" data-atomic="50" tabindex="0">
+	<b>50</b>
+	<abbr>Sn</abbr>
+	<em>锡</em>
+	<data data-abridged="118.71">118.71</data>
+</li>
+<li class="Metalloid p Solid" data-atomic="51" tabindex="0">
+	<b>51</b>
+	<abbr>Sb</abbr>
+	<em>锑</em>
+	<data data-abridged="121.76">121.76</data>
+</li>
+<li class="Metalloid p Solid" data-atomic="52" tabindex="0">
+	<b>52</b>
+	<abbr>Te</abbr>
+	<em>碲</em>
+	<data data-abridged="127.60">127.60</data>
+</li>
+<li class="Nonmetal p Solid" data-atomic="53" tabindex="0">
+	<b>53</b>
+	<abbr>I</abbr>
+	<em>碘</em>
+	<data data-abridged="126.90">126.90</data>
+</li>
+<li class="Noble p Gas" data-atomic="54" tabindex="0">
+	<b>54</b>
+	<abbr>Xe</abbr>
+	<em>氙</em>
+	<data data-abridged="131.29">131.29</data>
+</li>
+<div class="Period" data-num="6">6</div>
+<li class="Alkali s Solid" data-atomic="55" tabindex="0">
+	<b>55</b>
+	<abbr>Cs</abbr>
+	<em>铯</em>
+	<data data-abridged="132.91">132.91</data>
+</li>
+<li class="Alkaline s Solid" data-atomic="56" tabindex="0">
+	<b>56</b>
+	<abbr>Ba</abbr>
+	<em>钡</em>
+	<data data-abridged="137.33">137.33</data>
+</li>
+<div class="VerticalInner" id="VerticalInner"></div>
+<div class="Label57to71" tabindex="0"><span data-num="57">57</span>–<span data-num="71">71</span></div>
+<div class="Period Removed6" data-num="6">6</div>
+<li class="Lanthanoid f Solid" data-atomic="57" tabindex="0" data-wide="15">
+	<b>57</b>
+	<abbr>La</abbr>
+	<em>镧</em>
+	<data data-abridged="138.91">138.91</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="58" tabindex="0" data-wide="14 15">
+	<b>58</b>
+	<abbr>Ce</abbr>
+	<em>铈</em>
+	<data data-abridged="140.12">140.12</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="59" tabindex="0" data-wide="13 14 15">
+	<b>59</b>
+	<abbr>Pr</abbr>
+	<em>镨</em>
+	<data data-abridged="140.91">140.91</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="60" tabindex="0" data-wide="12 13 14 15">
+	<b>60</b>
+	<abbr>Nd</abbr>
+	<em>钕</em>
+	<data data-abridged="144.24">144.24</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="61" tabindex="0" data-wide="11 12 13 14 15">
+	<b>61</b>
+	<abbr>Pm</abbr>
+	<em>钷</em>
+	<data data-abridged="145" data-unstable="1">(145)</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="62" tabindex="0" data-wide="10 11 12 13 14 15">
+	<b>62</b>
+	<abbr>Sm</abbr>
+	<em>钐</em>
+	<data data-abridged="150.36">150.36</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="63" tabindex="0" data-wide="9 10 11 12 13 14 15">
+	<b>63</b>
+	<abbr>Eu</abbr>
+	<em>铕</em>
+	<data data-abridged="151.96">151.96</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="64" tabindex="0" data-wide="8 9 10 11 12 13 14 15">
+	<b>64</b>
+	<abbr>Gd</abbr>
+	<em>钆</em>
+	<data data-abridged="157.25">157.25</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="65" tabindex="0" data-wide="7 8 9 10 11 12 13 14 15">
+	<b>65</b>
+	<abbr>Tb</abbr>
+	<em>铽</em>
+	<data data-abridged="158.93">158.93</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="66" tabindex="0" data-wide="6 7 8 9 10 11 12 13 14 15">
+	<b>66</b>
+	<abbr>Dy</abbr>
+	<em>镝</em>
+	<data data-abridged="162.50">162.50</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="67" tabindex="0" data-wide="5 6 7 8 9 10 11 12 13 14 15">
+	<b>67</b>
+	<abbr>Ho</abbr>
+	<em>钬</em>
+	<data data-abridged="164.93">164.93</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="68" tabindex="0" data-wide="4 5 6 7 8 9 10 11 12 13 14 15">
+	<b>68</b>
+	<abbr>Er</abbr>
+	<em>铒</em>
+	<data data-abridged="167.26">167.26</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="69" tabindex="0" data-wide="3 4 5 6 7 8 9 10 11 12 13 14 15">
+	<b>69</b>
+	<abbr>Tm</abbr>
+	<em>铥</em>
+	<data data-abridged="168.93">168.93</data>
+</li>
+<li class="Lanthanoid f Solid" data-atomic="70" tabindex="0" data-wide="2 3 4 5 6 7 8 9 10 11 12 13 14 15">
+	<b>70</b>
+	<abbr>Yb</abbr>
+	<em>镱</em>
+	<data data-abridged="173.05">173.05</data>
+</li>
+<li class="Lanthanoid d Solid" data-atomic="71" tabindex="0" data-wide="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15">
+	<b>71</b>
+	<abbr>Lu</abbr>
+	<em>镥</em>
+	<data data-abridged="174.97">174.97</data>
+</li>
+<li class="Transition d Solid" data-atomic="72" tabindex="0">
+	<b>72</b>
+	<abbr>Hf</abbr>
+	<em>铪</em>
+	<data data-abridged="178.49">178.49</data>
+</li>
+<li class="Transition d Solid" data-atomic="73" tabindex="0">
+	<b>73</b>
+	<abbr>Ta</abbr>
+	<em>钽</em>
+	<data data-abridged="180.95">180.95</data>
+</li>
+<li class="Transition d Solid" data-atomic="74" tabindex="0">
+	<b>74</b>
+	<abbr>W</abbr>
+	<em>钨</em>
+	<data data-abridged="183.84">183.84</data>
+</li>
+<li class="Transition d Solid" data-atomic="75" tabindex="0">
+	<b>75</b>
+	<abbr>Re</abbr>
+	<em>铼</em>
+	<data data-abridged="186.21">186.21</data>
+</li>
+<li class="Transition d Solid" data-atomic="76" tabindex="0">
+	<b>76</b>
+	<abbr>Os</abbr>
+	<em>锇</em>
+	<data data-abridged="190.23">190.23</data>
+</li>
+<li class="Transition d Solid" data-atomic="77" tabindex="0">
+	<b>77</b>
+	<abbr>Ir</abbr>
+	<em>铱</em>
+	<data data-abridged="192.22">192.22</data>
+</li>
+<li class="Transition d Solid" data-atomic="78" tabindex="0">
+	<b>78</b>
+	<abbr>Pt</abbr>
+	<em>铂</em>
+	<data data-abridged="195.08">195.08</data>
+</li>
+<li class="Transition d Solid" data-atomic="79" tabindex="0">
+	<b>79</b>
+	<abbr>Au</abbr>
+	<em>金</em>
+	<data data-abridged="196.97">196.97</data>
+</li>
+<li class="Transition d Liquid" data-atomic="80" tabindex="0">
+	<b>80</b>
+	<abbr>Hg</abbr>
+	<em>汞</em>
+	<data data-abridged="200.59">200.59</data>
+</li>
+<li class="Poor p Solid" data-atomic="81" tabindex="0">
+	<b>81</b>
+	<abbr>Tl</abbr>
+	<em>铊</em>
+	<data data-abridged="204.38">204.38</data>
+</li>
+<li class="Poor p Solid" data-atomic="82" tabindex="0">
+	<b>82</b>
+	<abbr>Pb</abbr>
+	<em>铅</em>
+	<data data-abridged="207.2">207.2</data>
+</li>
+<li class="Poor p Solid" data-atomic="83" tabindex="0">
+	<b>83</b>
+	<abbr>Bi</abbr>
+	<em>铋</em>
+	<data data-abridged="208.98">208.98</data>
+</li>
+<li class="Poor p Solid" data-atomic="84" tabindex="0">
+	<b>84</b>
+	<abbr>Po</abbr>
+	<em>钋</em>
+	<data data-abridged="209" data-unstable="1">(209)</data>
+</li>
+<li class="Metalloid p Solid" data-atomic="85" tabindex="0">
+	<b>85</b>
+	<abbr>At</abbr>
+	<em>砹</em>
+	<data data-abridged="210" data-unstable="1">(210)</data>
+</li>
+<li class="Noble p Gas" data-atomic="86" tabindex="0">
+	<b>86</b>
+	<abbr>Rn</abbr>
+	<em>氡</em>
+	<data data-abridged="222" data-unstable="1">(222)</data>
+</li>
+<div class="Period" data-num="7">7</div>
+<li class="Alkali s Solid" data-atomic="87" tabindex="0">
+	<b>87</b>
+	<abbr>Fr</abbr>
+	<em>钫</em>
+	<data data-abridged="223" data-unstable="1">(223)</data>
+</li>
+<li class="Alkaline s Solid" data-atomic="88" tabindex="0">
+	<b>88</b>
+	<abbr>Ra</abbr>
+	<em>镭</em>
+	<data data-abridged="226" data-unstable="1">(226)</data>
+</li>
+<div class="Label89to103" tabindex="0"><span data-num="89">89</span>–<span data-num="103">103</span></div>
+<div class="Period Removed7" data-num="7">7</div>
+<li class="Actinoid f Solid" data-atomic="89" tabindex="0" data-wide="15">
+	<b>89</b>
+	<abbr>Ac</abbr>
+	<em>锕</em>
+	<data data-abridged="227" data-unstable="1">(227)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="90" tabindex="0" data-wide="14 15">
+	<b>90</b>
+	<abbr>Th</abbr>
+	<em>钍</em>
+	<data data-abridged="232.04">232.04</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="91" tabindex="0" data-wide="13 14 15">
+	<b>91</b>
+	<abbr>Pa</abbr>
+	<em>镤</em>
+	<data data-abridged="231.04">231.04</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="92" tabindex="0" data-wide="12 13 14 15">
+	<b>92</b>
+	<abbr>U</abbr>
+	<em>铀</em>
+	<data data-abridged="238.03">238.03</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="93" tabindex="0" data-wide="11 12 13 14 15">
+	<b>93</b>
+	<abbr>Np</abbr>
+	<em>镎</em>
+	<data data-abridged="237" data-unstable="1">(237)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="94" tabindex="0" data-wide="10 11 12 13 14 15">
+	<b>94</b>
+	<abbr>Pu</abbr>
+	<em>钚</em>
+	<data data-abridged="244" data-unstable="1">(244)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="95" tabindex="0" data-wide="9 10 11 12 13 14 15">
+	<b>95</b>
+	<abbr>Am</abbr>
+	<em>镅</em>
+	<data data-abridged="243" data-unstable="1">(243)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="96" tabindex="0" data-wide="8 9 10 11 12 13 14 15">
+	<b>96</b>
+	<abbr>Cm</abbr>
+	<em>锔</em>
+	<data data-abridged="247" data-unstable="1">(247)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="97" tabindex="0" data-wide="7 8 9 10 11 12 13 14 15">
+	<b>97</b>
+	<abbr>Bk</abbr>
+	<em>锫</em>
+	<data data-abridged="247" data-unstable="1">(247)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="98" tabindex="0" data-wide="6 7 8 9 10 11 12 13 14 15">
+	<b>98</b>
+	<abbr>Cf</abbr>
+	<em>锎</em>
+	<data data-abridged="251" data-unstable="1">(251)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="99" tabindex="0" data-wide="5 6 7 8 9 10 11 12 13 14 15">
+	<b>99</b>
+	<abbr>Es</abbr>
+	<em>锿</em>
+	<data data-abridged="252" data-unstable="1">(252)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="100" tabindex="0" data-wide="4 5 6 7 8 9 10 11 12 13 14 15">
+	<b>100</b>
+	<abbr>Fm</abbr>
+	<em>镄</em>
+	<data data-abridged="257" data-unstable="1">(257)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="101" tabindex="0" data-wide="3 4 5 6 7 8 9 10 11 12 13 14 15">
+	<b>101</b>
+	<abbr>Md</abbr>
+	<em>钔</em>
+	<data data-abridged="258" data-unstable="1">(258)</data>
+</li>
+<li class="Actinoid f Solid" data-atomic="102" tabindex="0" data-wide="2 3 4 5 6 7 8 9 10 11 12 13 14 15">
+	<b>102</b>
+	<abbr>No</abbr>
+	<em>锘</em>
+	<data data-abridged="259" data-unstable="1">(259)</data>
+</li>
+<li class="Actinoid d Solid" data-atomic="103" tabindex="0" data-wide="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15">
+	<b>103</b>
+	<abbr>Lr</abbr>
+	<em>铹</em>
+	<data data-abridged="266" data-unstable="1">(266)</data>
+</li>
+<li class="Transition d UnknownState" data-atomic="104" tabindex="0">
+	<b>104</b>
+	<abbr>Rf</abbr>
+	<em>𬬻</em>
+	<data data-abridged="267" data-unstable="1">(267)</data>
+</li>
+<li class="Transition d UnknownState" data-atomic="105" tabindex="0">
+	<b>105</b>
+	<abbr>Db</abbr>
+	<em>𬭊</em>
+	<data data-abridged="268" data-unstable="1">(268)</data>
+</li>
+<li class="Transition d UnknownState" data-atomic="106" tabindex="0">
+	<b>106</b>
+	<abbr>Sg</abbr>
+	<em>𬭳</em>
+	<data data-abridged="269" data-unstable="1">(269)</data>
+</li>
+<li class="Transition d UnknownState" data-atomic="107" tabindex="0">
+	<b>107</b>
+	<abbr>Bh</abbr>
+	<em>𬭛</em>
+	<data data-abridged="270" data-unstable="1">(270)</data>
+</li>
+<li class="Transition d UnknownState" data-atomic="108" tabindex="0">
+	<b>108</b>
+	<abbr>Hs</abbr>
+	<em>𬭶</em>
+	<data data-abridged="277" data-unstable="1">(277)</data>
+</li>
+<li class="Unknown d UnknownState" data-atomic="109" tabindex="0">
+	<b>109</b>
+	<abbr>Mt</abbr>
+	<em>鿏</em>
+	<data data-abridged="278" data-unstable="1">(278)</data>
+</li>
+<li class="Unknown d UnknownState" data-atomic="110" tabindex="0">
+	<b>110</b>
+	<abbr>Ds</abbr>
+	<em>𫟼</em>
+	<data data-abridged="281" data-unstable="1">(281)</data>
+</li>
+<li class="Unknown d UnknownState" data-atomic="111" tabindex="0">
+	<b>111</b>
+	<abbr>Rg</abbr>
+	<em>𬬭</em>
+	<data data-abridged="282" data-unstable="1">(282)</data>
+</li>
+<li class="Unknown d UnknownState" data-atomic="112" tabindex="0">
+	<b>112</b>
+	<abbr>Cn</abbr>
+	<em>鿔</em>
+	<data data-abridged="285" data-unstable="1">(285)</data>
+</li>
+<li class="Unknown p UnknownState" data-atomic="113" tabindex="0">
+	<b>113</b>
+	<abbr>Nh</abbr>
+	<em>鿭</em>
+	<data data-abridged="286" data-unstable="1">(286)</data>
+</li>
+<li class="Unknown p UnknownState" data-atomic="114" tabindex="0">
+	<b>114</b>
+	<abbr>Fl</abbr>
+	<em>𫓧</em>
+	<data data-abridged="289" data-unstable="1">(289)</data>
+</li>
+<li class="Unknown p UnknownState" data-atomic="115" tabindex="0">
+	<b>115</b>
+	<abbr>Mc</abbr>
+	<em>镆</em>
+	<data data-abridged="290" data-unstable="1">(290)</data>
+</li>
+<li class="Unknown p UnknownState" data-atomic="116" tabindex="0">
+	<b>116</b>
+	<abbr>Lv</abbr>
+	<em>𫟷</em>
+	<data data-abridged="293" data-unstable="1">(293)</data>
+</li>
+<li class="Unknown p UnknownState" data-atomic="117" tabindex="0">
+	<b>117</b>
+	<abbr>Ts</abbr>
+	<em>鿬</em>
+	<data data-abridged="294" data-unstable="1">(294)</data>
+</li>
+<li class="Unknown p UnknownState" data-atomic="118" tabindex="0">
+	<b>118</b>
+	<abbr>Og</abbr>
+	<em>鿫</em>
+	<data data-abridged="294" data-unstable="1">(294)</data>
+</li>
+<div class="PosterLogo"></div>
+<div class="Parentheses" id="Parentheses" data-default="对没有稳定同位素的元素，其同位素中半衰期最长的重量以括号标示。">对没有稳定同位素的元素，其同位素中半衰期最长的重量以括号标示。</div>
+</ol>
+</article>
+</main>
+
+
+
+
+
+
+
+
+
+</body></html>
