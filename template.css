@@ -1,0 +1,52 @@
+* {
+	box-sizing: border-box;
+	outline: none;
+}
+
+a {
+	color: inherit;
+}
+
+body {
+	background-color: rgb(30, 30, 30);
+	color: white;
+	cursor: default;
+	font-family: Helvetica, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	-webkit-tap-highlight-color: transparent;
+}
+
+header {
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 10px 15px;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+h1 {
+	margin: 15px 0;
+}
+
+main {
+	display: block;
+	margin: 15px;
+}
+
+.bg-img {
+	background-attachment: fixed;
+	background-image: url(https://cn.bing.com/th?id=OHR.InukshukLights_ZH-CN0756858983_1920x1080.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	-webkit-filter: blur(10px);
+	filter: blur(10px);
+	height: 100%;
+	left: 0;
+	opacity: 0.5;
+	position: fixed;
+	top: 0;
+	transform: scale(1.1);
+	width: 100%;
+	z-index: -1;
+}
