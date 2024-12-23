@@ -2,48 +2,67 @@
 <html lang="zh-CN">
 <head>
 <style>
-  .orangehand { 
-		color:orange;
-  		font-family: 'Handwriting', cursive; 
-  }
   .yellowhand { 
-		color:yellow;
-  		font-family: 'Handwriting', cursive; 
+    color: yellow;
+    font-family: 'Handwriting', cursive; 
   }
   .whitehand { 
-		color:white;
-  		font-family: 'Handwriting', cursive; 
+    color: white;
+    font-family: 'Handwriting', cursive; 
+  }
+  .purplehand { 
+    color: purple;
+    font-family: 'Handwriting', cursive; 
+  }
+  .orangehand { 
+    color: orange;
+    font-family: 'Handwriting', cursive;
   }
   .pinkhand { 
-		color:pink;
-  		font-family: 'Handwriting', cursive; 
+    color: pink;
+    font-family: 'Handwriting', cursive;
   }
-  .lightbluehand { 
-		color:lightblue;
-  		font-family: 'Handwriting', cursive; 
+  .redhand { 
+    color: red;
+    font-family: 'Handwriting', cursive;
+  }
+  .hothand { 
+    color: orange;
+    font-family: 'Handwriting', cursive;
+    animation: flash 2s infinite alternate, blink 3s infinite;
+  }
+  @keyframes blink {
+      50% { opacity: 0.75; }
+      100% { opacity: 1; }
+  }
+  @keyframes flash {
+	from { color: orange; }
+    to { color: #FFC0CB; } 
+  }
+  .bluehand { 
+    color: green;
+    font-family: 'Handwriting', cursive; 
   }
 </style>
-	<meta charset="utf-8">
-	<title>wangshen的个人主页</title>
-	<link rel="stylesheet" href="https://www.retiehe.com/css/template.css">
+        <meta charset="utf-8">
+        <title>首页</title>
+        <link rel="stylesheet" href="template.css">
 </head>
 <body>
-	<div class="bg-img"></div>
-	
-	<main>
-		<h2><span class="hand">您是第</span> <img src="https://www.cutercounter.com/hits.php?id=wangshensindex&nd=5&style=22"><span class="hand">个访问本网站的人。</span></h2>
-		<h2><span class="yellowhand"><a href="https://wangshen.rth1.xyz/ownmain/denglu.html">点此登录</a><span></span></span></h2>
-		<h2><span class="yellowhand"><a href="https://wangshen.rth1.xyz/ownmain/introduce.html">个人简介</a><span></span></span></h2>
-		<h2><span class="yellowhand"><a href="https://wangshen.rth1.xyz/ownmain/happy.html">开心一笑</a><span></span></span></h2>
-		<h2><span class="yellowhand"><a href="https://wangshen.rth1.xyz/ownmain/pt.html">元素周期表</a><span></span></span></h2>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<h2><img src="https://www.xht37.com/wp-content/uploads/2019/11/1572969040_781823.png" alt=""></h2>
+        <div class="bg-img"></div>
+        <main>
+            <h2><span class="whitehand">欢迎来到wangshen的个人主页<span></span></span></h2>
+            <h2><span class="yellowhand"><a href="https://wangshengithub.github.io/ownmain/denglu.html">点此登录</a><span/></h2>
+            <h2><span class="bluehand"><a href="https://wangshengithub.github.io/ownmain/echou.html">恶臭数字论证器（转载）</a><span/></h2>
+            <h2><span class="redhand">[Hot]<span/><span class="hothand"><a href="https://wangshengithub.github.io/ownmain/happy.html">开心一笑</a><span/></h2>
+            <h2><span class="purplehand"><a href="https://wangshengithub.github.io/ownmain/funny.html">点我有"惊喜"</a><span/></h2>
+            <h2><span class="yellowhand"><a href="https://wangshengithub.github.io/ownmain/introduce.html">个人简介</a><span/></h2>
+            <h2><span class="redhand">[Hot]<span/><span class="hothand"><a href="https://wangshengithub.github.io/ownmain/pt.html">元素周期表</a><span/></h2>
+            <h2><span class="redhand">[Hot]<span/><span class="hothand"><a href="https://wangshengithub.github.io/ownmain/wzq.html">来玩五子棋吧</a><span/></h2>
+            <h2><span class="bluehand"><a href="https://wangshengithub.github.io/ownmain/fastarticle.html">申论生成器（转载）</a><span/></h2>
+        	<h2><img src="https://www.xht37.com/wp-content/uploads/2019/11/1572969040_781823.png" alt=""></h2>
 		<h2><span class="pinkhand">今日古诗词（刷新一下试试）<span></span></span></h2>
 		<h2><img src="https://v2.jinrishici.com/one.svg?color=yellow" alt=""></h2>
-	</main>
+	    </main>
 </body>
 </html>
